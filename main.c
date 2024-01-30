@@ -289,7 +289,17 @@ int main(int argc, char* argv[]) {
 
             /* Text on the tasks */
             SDL_Color textColor = {255, 255, 255};
-            SDL_Surface* textSurface = TTF_RenderText_Solid(font, "a task", textColor);
+
+            const char* taskText;
+            if (i == 0) {
+                taskText = "a task";
+            } else if ( i < 10 ){
+                taskText = "another task";
+            } else {
+                taskText = "DO YOUR TASKS !!!";
+            }
+
+            SDL_Surface* textSurface = TTF_RenderText_Solid(font, taskText, textColor);
             SDL_Texture* textTexture = SDL_CreateTextureFromSurface(rend, textSurface);
             SDL_Rect textRect = {tasks[i].x, tasks[i].y, textSurface->w, textSurface->h};
             SDL_RenderCopy(rend, textTexture, NULL, &textRect);
